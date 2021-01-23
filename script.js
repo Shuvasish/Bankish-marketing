@@ -75,39 +75,97 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
-// //event
-// const alerth1 = function () {
-//   alert('enter');
-//   h1.removeEventListener('mouseenter', alerth1);
-// };
+
+//tabed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabContent = document.querySelectorAll('.operations__content');
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  //gurding
+  if (!clicked) return;
+
+  //remove classes from tabs
+  tabs.forEach(t => {
+    t.classList.remove('operations__tab--active');
+  });
+
+  //active tab
+  clicked.classList.add('operations__tab--active');
+  console.log(`operations__content--${clicked.dataset.tab}`);
+  //remove classes from content
+  tabContent.forEach(t => t.classList.remove('operations__content--active'));
+  //active content
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+  // console.log(clicked.dataset.tab);
+});
+
+// const tem = clicked.parentElement.children;
+// console.log(tem);
+// [...tem].forEach(e => {
+//   if (e !== clicked) {
+//     e.classList.remove('operations__tab--active');
+//   }
+// });
+// // //event
+// // const alerth1 = function () {
+// //   alert('enter');
+// //   h1.removeEventListener('mouseenter', alerth1);
+// // };
+// // const h1 = document.querySelector('h1');
+// // h1.addEventListener('mouseenter', alerth1);
+
+// // //bubbling
+
+// // const randomInt = (min, max) =>
+// //   Math.floor(Math.random() * (max - min + 1) + min);
+// // const randomColor = () =>
+// //   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+// // console.log(randomColor());
+
+// // document.querySelector('.nav__link').addEventListener('click', function (e) {
+// //   this.style.backgroundColor = randomColor();
+// //   console.log('link', e.target, e.currentTarget);
+// //   // e.stopPropagation();
+// // });
+// // document.querySelector('.nav__links').addEventListener('click', function (e) {
+// //   this.style.backgroundColor = randomColor();
+// //   console.log('links', e.target, e.currentTarget);
+// //   // e.stopPropagation();
+// // });
+
+// // document.querySelector('.nav').addEventListener(
+// //   'click',
+// //   function (e) {
+// //     this.style.backgroundColor = randomColor();
+// //     console.log('nav', e.target, e.currentTarget);
+// //     // e.stopPropagation();
+// //   },
+// //   false
+// // );
+// //dom traversing
 // const h1 = document.querySelector('h1');
-// h1.addEventListener('mouseenter', alerth1);
-
-// //bubbling
-
-// const randomInt = (min, max) =>
-//   Math.floor(Math.random() * (max - min + 1) + min);
-// const randomColor = () =>
-//   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
-// console.log(randomColor());
-
-// document.querySelector('.nav__link').addEventListener('click', function (e) {
-//   this.style.backgroundColor = randomColor();
-//   console.log('link', e.target, e.currentTarget);
-//   // e.stopPropagation();
+// console.log();
+// console.log(h1.children);
+// console.log(typeof [...h1.childNodes].forEach(e => console.log(e)));
+// [...h1.children].forEach(e => (e.style.color = 'white'));
+// // console.log(h1.firstElementChild);
+// // console.log(h1.lastElementChild);
+// // // const n = document.querySelector('.nav');
+// // // console.log(n.childNodes);
+// // // console.log(n.children);
+// // h1.children.forEach(e => (e.style.color = 'white'));
+// //going upwareds: parents
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
+// h1.closest('h1').style.background = 'var(--gradient-primary)';
+// h1.closest('h1').style.borderRadius = '100px';
+// [...h1.parentElement.children].forEach(e => {
+//   if (e !== h1) {
+//     return (e.style.transform = 'scale(.711)');
+//   }
 // });
-// document.querySelector('.nav__links').addEventListener('click', function (e) {
-//   this.style.backgroundColor = randomColor();
-//   console.log('links', e.target, e.currentTarget);
-//   // e.stopPropagation();
-// });
-
-// document.querySelector('.nav').addEventListener(
-//   'click',
-//   function (e) {
-//     this.style.backgroundColor = randomColor();
-//     console.log('nav', e.target, e.currentTarget);
-//     // e.stopPropagation();
-//   },
-//   false
-// );
