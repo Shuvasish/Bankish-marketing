@@ -127,16 +127,16 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 
 //recommended way
 // console.log(document.querySelector('.nav').getBoundingClientRect().height);
-console.log(nav.getBoundingClientRect().height);
+// console.log(nav.getBoundingClientRect().height);
 const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
+// console.log(navHeight);
 const obsCallback = function (entries) {
   const [entry] = entries;
   // console.log();
   if (!entry.isIntersecting) {
     nav.classList.add('sticky');
-    console.log(nav.getBoundingClientRect().height);
+    // console.log(nav.getBoundingClientRect().height);
   } else if (entry.isIntersecting) {
     nav.classList.remove('sticky');
   }
@@ -147,6 +147,28 @@ const headerObserver = new IntersectionObserver(obsCallback, {
   rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
+
+//revealing sections on scroll
+const allSections = document.querySelectorAll('.section');
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry.target.classList);
+
+  if (!entry.isIntersecting) return;
+  if (entry.isIntersecting) {
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+  }
+};
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
 //not recommended way
 
 // const initialCords = section1.getBoundingClientRect();
