@@ -112,8 +112,8 @@ const handleHover = function (e) {
     siblings.forEach(el => {
       if (el !== link) {
         // console.log(el);
-        console.log(e);
-        console.log(this);
+        // console.log(e);
+        // console.log(this);
         el.style.opacity = this;
       }
     });
@@ -122,6 +122,50 @@ const handleHover = function (e) {
 };
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
+
+//sticky navbar
+
+//recommended way
+// console.log(document.querySelector('.nav').getBoundingClientRect().height);
+console.log(nav.getBoundingClientRect().height);
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
+const obsCallback = function (entries) {
+  const [entry] = entries;
+  // console.log();
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+    console.log(nav.getBoundingClientRect().height);
+  } else if (entry.isIntersecting) {
+    nav.classList.remove('sticky');
+  }
+};
+const headerObserver = new IntersectionObserver(obsCallback, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+headerObserver.observe(header);
+//not recommended way
+
+// const initialCords = section1.getBoundingClientRect();
+// window.addEventListener('scroll', function (e) {
+//   // console.log(
+//   //   document.querySelector('#section--1').getBoundingClientRect().top +
+//   //     window.pageYOffset
+//   // );
+//   // console.log(window.scrollY);
+//   console.log('sdfdf');
+//   console.log(initialCords.top + window.pageYOffset);
+//   console.log(window.scrollY);
+//   if (window.scrollY >= initialCords.top) {
+//     console.log('enter');
+//     nav.classList.add('sticky');
+//   } else {
+//     nav.classList.remove('sticky');
+//   }
+// });
 /////////////////////
 /////////////////////
 /////////////////////
@@ -214,3 +258,14 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 //     return (e.style.transform = 'scale(.711)');
 //   }
 // });
+
+//intersectionObserver
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => console.log(entry));
+// };
+// const obsOptions = {
+//   root: null,
+//   threshold: [0, 0.2],
+// };
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe(section1);
