@@ -5,6 +5,10 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabContent = document.querySelectorAll('.operations__content');
 
 ///////////////////////////////////////
 // Modal window
@@ -77,9 +81,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 });
 
 //tabed component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabContent = document.querySelectorAll('.operations__content');
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab');
 
@@ -90,10 +91,8 @@ tabsContainer.addEventListener('click', function (e) {
   tabs.forEach(t => {
     t.classList.remove('operations__tab--active');
   });
-
   //active tab
   clicked.classList.add('operations__tab--active');
-  console.log(`operations__content--${clicked.dataset.tab}`);
   //remove classes from content
   tabContent.forEach(t => t.classList.remove('operations__content--active'));
   //active content
@@ -102,6 +101,52 @@ tabsContainer.addEventListener('click', function (e) {
     .classList.add('operations__content--active');
   // console.log(clicked.dataset.tab);
 });
+
+//menu fade animations
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+    // console.log(siblings);
+    siblings.forEach(el => {
+      if (el !== link) {
+        // console.log(el);
+        console.log(e);
+        console.log(this);
+        el.style.opacity = this;
+      }
+    });
+    // logo.style.opacity = e;
+  }
+};
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
+/////////////////////
+/////////////////////
+/////////////////////
+
+//my way
+// const tar = document.querySelector('.nav');
+// tar.addEventListener('mouseover', function (e) {
+//   //   console.log(e.target);
+//   //   console.log(e.target.closest('.nav').children);
+//   [...e.target.closest('.nav').children].forEach(el => {
+//     console.log(el);
+//     console.log(e.target.closest('.nav').children);
+//     [...e.target.closest('.nav').children].forEach(c => {
+//       console.log(el === c);
+//       if (c !== el) {
+//         c.style.opacity = 0.5;
+//       } else {
+//         console.log(c);
+//         // c.style.opacity = 1;
+//       }
+//     });
+//     console.log(el === e.target.closest('.nav').children);
+//   });
+// });
+// e.target.style.opacity = 1;
 
 // const tem = clicked.parentElement.children;
 // console.log(tem);
