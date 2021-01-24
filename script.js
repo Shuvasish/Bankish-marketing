@@ -169,6 +169,36 @@ allSections.forEach(function (section) {
   section.classList.add('section--hidden');
 });
 
+//lazy loading images
+const imgTargets = document.querySelectorAll('img[data-src]');
+console.log(imgTargets);
+const loadImg = function (entires, observer) {
+  const [entry] = entires;
+  console.log(entry);
+  if (!entry.isIntersecting) return;
+
+  //replace src with data-src
+
+  entry.target.src = entry.target.dataset.src;
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
+
+  // console.log(entry.target.dataset.src);
+  // console.log(entry.target.getAttribute('src'));
+  // entry.target.getAttribute('src').replace(entry.target.dataset.src);
+  // console.log(
+  //   entry.target.getAttribute('src').replace(entry.target.dataset.src)
+  // );
+};
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
 //not recommended way
 
 // const initialCords = section1.getBoundingClientRect();
@@ -178,7 +208,7 @@ allSections.forEach(function (section) {
 //   //     window.pageYOffset
 //   // );
 //   // console.log(window.scrollY);
-//   console.log('sdfdf');
+
 //   console.log(initialCords.top + window.pageYOffset);
 //   console.log(window.scrollY);
 //   if (window.scrollY >= initialCords.top) {
