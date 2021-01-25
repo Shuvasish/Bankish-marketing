@@ -1,6 +1,6 @@
 # Bankish-marketing
 
-I used some modern features on this project. Everything was build by using vanilla javascript.
+I used some modern effects on this project. Everything was build by using vanilla javascript.
 
 Those features are
 
