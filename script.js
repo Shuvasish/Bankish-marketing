@@ -166,7 +166,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 });
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  // section.classList.add('section--hidden');
+  section.classList.add('section--hidden');
 });
 
 //lazy loading images
@@ -201,6 +201,7 @@ const imgObserver = new IntersectionObserver(loadImg, {
 imgTargets.forEach(img => imgObserver.observe(img));
 
 //Slider
+
 const slider = function () {
   const slides = document.querySelectorAll('.slide');
   const btnLeft = document.querySelector('.slider__btn--left');
@@ -266,15 +267,9 @@ const slider = function () {
     e.key === 'ArrowRight' && nextSlide();
   });
 
-  //initialization
-  const init = function () {
-    goToSlide(curSlide);
-    createDots();
-    activateDot(curSlide);
-  };
-  init();
   //event handlers
 
+  //initialization
   dotContainer.addEventListener('click', function (e) {
     // console.log(e.target);
     if (e.target.classList.contains('dots__dot')) {
@@ -284,6 +279,12 @@ const slider = function () {
       activateDot(curSlide);
     }
   });
+  const init = function () {
+    goToSlide(curSlide);
+    createDots();
+    activateDot(curSlide);
+  };
+  init();
 };
 slider();
 
